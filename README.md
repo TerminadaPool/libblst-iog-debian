@@ -40,7 +40,7 @@ The following sequence of commands will remove and recreate the "${HOME}/src/lib
 CARDANO_NODE_VERSION='8.9.1'; \
 IOHKNIX_COMMIT="$(curl https://raw.githubusercontent.com/IntersectMBO/cardano-node/$CARDANO_NODE_VERSION/flake.lock | jq -r '.nodes.iohkNix.locked.rev')"; \
 echo "iohk-nix commit: $IOHKNIX_COMMIT"; \
-BLST_VERSION=$(curl https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/flake.lock | jq -r '.nodes.blst.original.ref'); \
+BLST_VERSION=$(curl https://raw.githubusercontent.com/IntersectMBO/iohk-nix/master/flake.lock | jq -r '.nodes.blst.original.ref'); \
 BLST_VERSION="${BLST_VERSION#v}"; \
 echo "Using blst version: ${BLST_VERSION}"; \
 
@@ -51,10 +51,15 @@ mkdir -p "${basedir}"; \
 cd "${basedir}"; \
 rm -rf "${package}-${BLST_VERSION}"; \
 
+# libblst source
 git clone --depth 1 --branch "v${BLST_VERSION}" https://github.com/supranational/blst "${package}-${BLST_VERSION}"; \
 cd "${package}-${BLST_VERSION}"; \
+
+# deb package build instructions
 git clone "https://github.com/TerminadaPool/libblst-iog-debian.git" debian; \
 unset CARDANO_NODE_VERSION IOHKNIX_COMMIT BLST_VERSION package basedir; \
+
+# build deb package
 debuild -us -uc -b;
 ```
 
