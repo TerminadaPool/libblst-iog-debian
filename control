@@ -1,0 +1,22 @@
+Source: libblst-iog
+Section: libs
+Priority: optional
+Maintainer: builder <builder@terminada.io>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+Standards-Version: 4.6.2
+Homepage: https://github.com/supranational/blst
+
+Package: libblst-iog
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+Conflicts: libblst
+Replaces: libblst
+Provides: libblst
+Description: Signature library focused on performance and security
+ blst (pronounced 'blast') is a BLS12-381 signature library focused on
+ performance and security. It is written in C and assembly.
