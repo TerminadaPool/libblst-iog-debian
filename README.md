@@ -71,7 +71,6 @@ See: 'control' file for where this is configured.
 
 Expect to see the following lintian errors at the end of the build process:  
 > E: libblst-iog: no-copyright-file  
-> W: libblst-iog: package-name-doesnt-match-sonames libblst  
 
 
 ### References

@@ -1,5 +1,5 @@
 .debhelper/
 debhelper-build-stamp
 files
-libblst.substvars
-libblst/
+libblst-iog.substvars
+libblst-iog/
