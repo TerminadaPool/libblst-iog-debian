@@ -14,4 +14,4 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 override_dh_auto_build:
 	echo "CFLAGS=${CFLAGS}"
 	./build.sh
-	debian/make_pkgconfig.sh
+	debian/make_pkgconfig
