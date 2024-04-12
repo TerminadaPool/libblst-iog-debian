@@ -20,11 +20,16 @@ Install build dependencies and some extra requirements
 sudo apt install build-essential fakeroot devscripts debhelper autoconf-archive d-shlibs pkg-kde-tools git curl automake pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make jq libncursesw5 libtool autoconf libncurses-dev libncurses5
 ```
 
-Recommend install llvm and set cc and c++ to use clang
+Optionally install llvm and set cc and c++ to use clang
 ```
 sudo apt install llvm clang libnuma-dev; \
 sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100; \
 sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+```
+Ubuntu users might need to skip the previous optional step if their Ubuntu version of clang doesn't support optimization flag '-ffat-lto-objects'.  Revert the previous changes with:
+```
+sudo update-alternatives --remove-all cc; \
+sudo update-alternatives --remove-all c++
 ```
 
 Switch to your builder account
