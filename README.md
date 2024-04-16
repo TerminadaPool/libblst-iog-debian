@@ -40,9 +40,11 @@ sudo su - builder
 The rest of this document assumes you are using your 'builder' account:  
 builder@build:~$
 
+Ensure you have set the variable CARDANO_NODE_VERSION to the current release version of cardano-node.  
+See: [cardano-node-debian](/debian/cardano-node-debian)
+
 The following sequence of commands will remove and recreate the "${HOME}/src/libblst-iog" directory.  Familiarise yourself with the following commands before running them.  You can simply copy and paste the entire list of commands below into a bash terminal to run them in sequence.
 ```
-CARDANO_NODE_VERSION='8.9.1'; \
 IOHKNIX_COMMIT="$(curl https://raw.githubusercontent.com/IntersectMBO/cardano-node/$CARDANO_NODE_VERSION/flake.lock | jq -r '.nodes.iohkNix.locked.rev')"; \
 echo "iohk-nix commit: $IOHKNIX_COMMIT"; \
 BLST_VERSION=$(curl https://raw.githubusercontent.com/input-output-hk/iohk-nix/master/flake.lock | jq -r '.nodes.blst.original.ref'); \
