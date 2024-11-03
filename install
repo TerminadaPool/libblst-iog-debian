@@ -1,0 +1,5 @@
+bindings/blst.h /usr/include/
+bindings/blst.hpp /usr/include/
+bindings/blst_aux.h /usr/include/
+libblst.a /usr/lib/${DEB_HOST_MULTIARCH}/
+libblst.pc /usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/

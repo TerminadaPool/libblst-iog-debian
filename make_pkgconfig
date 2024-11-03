@@ -1,0 +1,21 @@
+#!/bin/sh
+# Author: builder@terminada.io
+# Created: 20231209
+
+DEB_HOST_MULTIARCH="$(dpkg-architecture -qDEB_HOST_MULTIARCH)"
+BLST_VERSION="$(cat debian/changelog | sed -rn 's/^libblst \(([0-9\.]+)\).*/\1/p')"
+
+cat > libblst.pc << END_LIBBLST_PC
+prefix=/usr
+exec_prefix=\${prefix}
+libdir=\${prefix}/lib/${DEB_HOST_MULTIARCH}
+includedir=\${prefix}/include
+
+Name: libblst
+Description: Multilingual BLS12-381 signature library
+Version: ${BLST_VERSION}
+URL: https://github.com/supranational/blst
+
+Libs: -L\${libdir} -lblst
+Cflags: -I\${includedir}
+END_LIBBLST_PC
