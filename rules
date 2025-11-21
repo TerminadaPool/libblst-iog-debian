@@ -6,7 +6,10 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic -fno-builtin -fPIC -Wextra -Werror
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
-DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+PKGNAME := $(shell dpkg-parsechangelog -S Source)
+VERSION := $(shell dpkg-parsechangelog -S Version | cut -d'-' -f1)
+DEB_HOST_MULTIARCH := $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+PC_FILE=$(CURDIR)/debian/$(PKGNAME)/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/libblst.pc
 
 %:
 	dh $@
@@ -15,3 +18,8 @@ override_dh_auto_build:
 	echo "CFLAGS=${CFLAGS}"
 	./build.sh
 	debian/make_pkgconfig
+
+override_dh_installdocs:
+	dh_installdocs
+	# Include the proper version string in the pc file
+	sed -i "s/^Version:.*/Version: $(VERSION)/" $(PC_FILE)
